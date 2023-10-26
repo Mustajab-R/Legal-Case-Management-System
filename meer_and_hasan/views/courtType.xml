@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="court_type_form" model="ir.ui.view">
+            <field name="name">Cout_Type_Form</field>
+            <field name="model">courttypes.model</field>
+            <field name="arch" type="xml">
+                <form string="District Form">
+                    <sheet>
+                        <group>
+                            <field name="title"/>
+                        </group>
+                        <notebook>
+                            <page string="Court/Judges Name">
+                                 <group>
+                                    <field name="courtNameId" widget="section_and_note_one2many" mode="tree">
+                                        <form>
+                                            <field name="title"/>
+                                        </form>
+                                        <tree>
+                                            <field name="title"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="court_type_tree" model="ir.ui.view">
+            <field name="name">Court_Type_Form</field>
+            <field name="model">courttypes.model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="title"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+meer_and_hasan.access_matter_model,access_matter_model,meer_and_hasan.model_matter_model,base.group_user,1,1,1,1
+meer_and_hasan.access_precedings_model,access_precedings_model,meer_and_hasan.model_precedings_model,base.group_user,1,1,1,1
+meer_and_hasan.access_document_model,access_document_model,meer_and_hasan.model_document_model,base.group_user,1,1,1,1
+meer_and_hasan.access_district_model,access_district_model,meer_and_hasan.model_district_model,base.group_user,1,1,1,1
+meer_and_hasan.access_courttypes_model,access_courttypes_model,meer_and_hasan.model_courttypes_model,base.group_user,1,1,1,1
+meer_and_hasan.access_courtname_model,access_courtname_model,meer_and_hasan.model_courtname_model,base.group_user,1,1,1,1
+meer_and_hasan.access_policestation_model,access_policestation_model,meer_and_hasan.model_policestation_model,base.group_user,1,1,1,1
+meer_and_hasan.access_casecategory_model,access_casecategory_model,meer_and_hasan.model_casecategory_model,base.group_user,1,1,1,1
+meer_and_hasan.access_casestage_model,access_casestage_model,meer_and_hasan.model_casestage_model,base.group_user,1,1,1,1

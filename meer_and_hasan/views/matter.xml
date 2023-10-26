@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="matter_form" model="ir.ui.view">
+            <field name="name">Matters_Form</field>
+            <field name="model">matter.model</field>
+            <field name="arch" type="xml">
+                <form string="Matter Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <!--                        <label for="title" string="Matter Title:"/>-->
+                                <field name="title"/>
+                                <field name="stage"/>
+                                <field name="fir_number"/>
+                                <field name="fir_year"/>
+                                <field name="assign_to_user_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                <field name="reviewed_by_ids" widget="many2many_tags" options="{'no_create': True}"
+                                       attrs="{'readonly': [('assign_to_user_ids', '=', False)]}"/>
+
+                            </group>
+                            <group>
+                                <field name="district_id"/>
+                                <field name="court_type_id" attrs="{'readonly': [('district_id', '=', False)]}"
+                                       domain="[('district_id', '=', district_id)]"
+                                />
+                                <field name="court_name_id" attrs="{'readonly': [('court_type_id', '=', False)]}"
+                                       domain="[('court_type_id', '=', court_type_id)]"
+                                />
+                                <field name="case_category_id" attrs="{'readonly': [('court_name_id', '=', False)]}"
+                                       domain="[('court_type_id', '=', court_type_id)]"
+                                />
+
+                                <field name="police_station_id" attrs="{'readonly': [('district_id', '=', False)]}"
+                                       domain="[('district_id', '=', district_id)]"
+                                />
+                            </group>
+                        </group>
+                        <notebook>
+                            <!-- Proceedings tab -->
+                            <page string="Proceedings">
+                                <group>
+                                    <!-- Add the title field for "precedings" -->
+                                    <field name="preceding_id" widget="section_and_note_one2many" mode="tree">
+                                        <form>
+                                            <label for="title" string="Enter Preceding Title"/>
+                                            <field name="title"/>
+                                            <label for="case_stage_id" string="Matter Stage"/>
+                                            <field name="case_stage_id"/>
+                                        </form>
+                                        <tree>
+                                            <field name="title"/>
+                                            <field name="case_stage_id"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+
+                            <page string="Documents">
+                                <group>
+                                    <!-- Add the title field for "Documents" -->
+                                    <field name="document_id" widget="section_and_note_one2many" mode="tree">
+                                        <form>
+                                            <label for="title" string="Enter Document Title"/>
+                                            <field name="title" string="Enter Document Title"/>
+                                            <label for="title" string="Upload File"/>
+                                            <field name="file" string="Attach File"/>
+                                        </form>
+                                        <tree>
+                                            <field name="title"/>
+                                            <field name="file"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </page>
+
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="matters_tree" model="ir.ui.view">
+            <field name="name">Matters.tree</field>
+            <field name="model">matter.model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="title"/>
+                    <field name="stage"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_proceedings_form" model="ir.ui.view">
+            <field name="name">Precedings</field>
+            <field name="model">precedings.model</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="title"/>
+                            <field name="matter_id" options="{'no_create': True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+
+
+</odoo>

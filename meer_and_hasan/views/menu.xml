@@ -1,0 +1,37 @@
+<odoo>
+
+    <record id="matter_action" model="ir.actions.act_window">
+        <field name="name">Matters</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="res_model">matter.model</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Enter New Matter</p>
+        </field>
+    </record>
+    <record id="district_action" model="ir.actions.act_window">
+        <field name="name">Districts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="res_model">district.model</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Enter New District</p>
+        </field>
+    </record>
+    <record id="matter_stage_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="res_model">casestage.model</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Enter New District</p>
+        </field>
+    </record>
+    <menuitem id="mattersSubMenu" name="Matters" sequence="0" action="matter_action"/>
+    <menuitem id="districtSubMenu" parent="mattersSubMenu" name="Districts" sequence="0" action="district_action"/>
+    <menuitem id="Settings" parent="mattersSubMenu" name="Settings" sequence="0" action="matter_stage_action"/>
+
+</odoo>

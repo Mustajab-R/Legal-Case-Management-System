@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <!-- View for District (Form and Tree views) -->
+        <record id="view_setting_form" model="ir.ui.view">
+            <field name="name">Setting Form</field>
+            <field name="model">casestage.model</field>
+            <field name="arch" type="xml">
+                <form string="Setting Form">
+                    <sheet>
+                        <notebook>
+                            <page string="Matter Stage">
+                                <form>
+                                    <field name="title" />
+                                    <!-- Exclude the 'precedings' field from the form -->
+                                    <!-- Add any other fields you want to include here -->
+                                </form>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- View for District (Tree view) -->
+        <record id="view_setting_tree" model="ir.ui.view">
+            <field name="name">Settings Tree</field>
+            <field name="model">casestage.model</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <!-- Include other fields you want in the tree view here -->
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
