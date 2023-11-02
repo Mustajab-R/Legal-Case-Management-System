@@ -1,14 +1,14 @@
 <odoo>
     <data>
         <!-- View for District (Form and Tree views) -->
-        <record id="view_setting_form" model="ir.ui.view">
-            <field name="name">Setting Form</field>
-            <field name="model">casestage.model</field>
+        <record id="view_case_status_form" model="ir.ui.view">
+            <field name="name">Case Status Form</field>
+            <field name="model">casestatus.model</field>
             <field name="arch" type="xml">
                 <form string="Setting Form">
                     <sheet>
                         <form>
-                            <label for="title" string="Matter Stage"/>
+                            <label for="title" string="Matter Status"/>
                             <field name="title"/>
                         </form>
                     </sheet>
@@ -17,9 +17,9 @@
         </record>
 
         <!-- View for District (Tree view) -->
-        <record id="view_setting_tree" model="ir.ui.view">
-            <field name="name">Settings Tree</field>
-            <field name="model">casestage.model</field>
+        <record id="view_case_status_tree" model="ir.ui.view">
+            <field name="name">Case Status Tree</field>
+            <field name="model">casestatus.model</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="title"/>

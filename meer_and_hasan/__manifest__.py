@@ -14,8 +14,11 @@
         'security/ir.model.access.csv',
         'security/security.xml',
         'views/district.xml',
-        'views/courtType.xml'
+        'views/courtType.xml',
+        'views/caseStatus.xml',
+        'views/settings.xml'
     ],
+    'depends': ['sale'],
     # data files containing optionally loaded demonstration data
     'demo': [
     ],

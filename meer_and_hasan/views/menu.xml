@@ -1,9 +1,8 @@
 <odoo>
-
     <record id="matter_action" model="ir.actions.act_window">
         <field name="name">Matters</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">tree,form,kanban,search</field>
         <field name="res_model">matter.model</field>
         <field name="context">{}</field>
         <field name="help" type="html">
@@ -21,17 +20,29 @@
         </field>
     </record>
     <record id="matter_stage_action" model="ir.actions.act_window">
-        <field name="name">Settings</field>
+        <field name="name">Matter Stage</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_mode">tree,form,kanban</field>
         <field name="res_model">casestage.model</field>
         <field name="context">{}</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Enter New District</p>
+            <p class="o_view_nocontent_smiling_face">Enter New Matter Stage</p>
         </field>
     </record>
+    <record id="matter_status_action" model="ir.actions.act_window">
+        <field name="name">Matter Status</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="res_model">casestatus.model</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Enter New Matter Status</p>
+        </field>
+    </record>
+
     <menuitem id="mattersSubMenu" name="Matters" sequence="0" action="matter_action"/>
     <menuitem id="districtSubMenu" parent="mattersSubMenu" name="Districts" sequence="0" action="district_action"/>
-    <menuitem id="Settings" parent="mattersSubMenu" name="Settings" sequence="0" action="matter_stage_action"/>
-
+    <menuitem id="Settings" parent="mattersSubMenu" name="Settings" sequence="0"/>
+    <menuitem id="MatterStageSubMenu" parent="Settings" name="Matter Stage" sequence="0" action="matter_stage_action"/>
+    <menuitem id="MatterStatusSubMenu" parent="Settings" name="Matter Status" sequence="1" action="matter_status_action"/>
 </odoo>

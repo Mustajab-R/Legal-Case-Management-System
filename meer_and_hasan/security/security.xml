@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="admin_attorney_group" model="res.groups">
-        <field name="name">Admin Attorney</field>
+        <field name="name">admin_attorney</field>
     </record>
     <record id="attorney_group" model="res.groups">
         <field name="name">Attorney</field>

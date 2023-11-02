@@ -8,14 +8,24 @@
             <field name="arch" type="xml">
                 <form string="Matter Form">
                     <sheet>
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <h1 style="text-align: center;">
+                                <field name="title" placeholder="Enter Matter Title"/>
+                            </h1>
+                        </div>
                         <group>
                             <group>
                                 <!--                        <label for="title" string="Matter Title:"/>-->
-                                <field name="title"/>
-                                <field name="stage"/>
+                                <field name="case_status_id"/>
                                 <field name="fir_number"/>
                                 <field name="fir_year"/>
-                                <field name="assign_to_user_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                <field name="file_number"/>
+                                <field name="case_no"/>
+                                <field name="description"/>
+                                <field name="institution_number"/>
+                                <field name="date"/>
+                                <field name="assign_to_user_ids" widget="many2many_tags" options="{'no_create': True}"
+                                       group="meer_and_hasan.access_admin_attorney"/>
                                 <field name="reviewed_by_ids" widget="many2many_tags" options="{'no_create': True}"
                                        attrs="{'readonly': [('assign_to_user_ids', '=', False)]}"/>
 
@@ -35,6 +45,15 @@
                                 <field name="police_station_id" attrs="{'readonly': [('district_id', '=', False)]}"
                                        domain="[('district_id', '=', district_id)]"
                                 />
+                                <field name="further_article"/>
+                                <field name="party_1_id"/>
+                                <field name="party_2_id" domain="[('id', '!=', party_1_id)]"/>
+                                <field name="related_matter_id"/>
+                                <field name="order_id"/>
+                                <button string="Create Related Matter" type="object" name="action_create_related_matter"
+                                        class="oe_highlight"/>
+
+
                             </group>
                         </group>
                         <notebook>
@@ -44,10 +63,32 @@
                                     <!-- Add the title field for "precedings" -->
                                     <field name="preceding_id" widget="section_and_note_one2many" mode="tree">
                                         <form>
-                                            <label for="title" string="Enter Preceding Title"/>
-                                            <field name="title"/>
-                                            <label for="case_stage_id" string="Matter Stage"/>
-                                            <field name="case_stage_id"/>
+                                            <group>
+                                                <group>
+                                                    <field name="title"/>
+                                                </group>
+                                                <group>
+                                                    <field name="case_stage_id"/>
+                                                </group>
+                                                <field name="proceedings_document_id">
+                                                    <tree>
+                                                        <field name="title"/>
+                                                        <field name="date"/>
+                                                        <field name="file"/>
+                                                    </tree>
+                                                    <form>
+                                                        <group>
+                                                            <group>
+                                                                <field name="title"/>
+                                                                <field name="date"/>
+                                                            </group>
+                                                            <group>
+                                                                <field name="file"/>
+                                                            </group>
+                                                        </group>
+                                                    </form>
+                                                </field>
+                                            </group>
                                         </form>
                                         <tree>
                                             <field name="title"/>
@@ -87,8 +128,35 @@
             <field name="model">matter.model</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="title"/>
-                    <field name="stage"/>
+                    <field name="title" filters="1"/>
+                    <field name="case_status_id" filters="1"/>
+                    <field name="fir_number" filters="1"/>
+                    <field name="fir_year" filters="1"/>
+                    <field name="file_number" filters="1"/>
+                    <field name="case_no" filters="1"/>
+                    <field name="description" filters="1"/>
+                    <field name="institution_number" filters="1"/>
+                    <field name="date" filters="1"/>
+                    <field name="assign_to_user_ids" widget="many2many_tags" options="{'no_create': True}" filters="1"/>
+                    <field name="reviewed_by_ids" widget="many2many_tags" options="{'no_create': True}"
+                           attrs="{'readonly': [('assign_to_user_ids', '=', False)]}" filters="1"/>
+                    <field name="district_id" filters="1"/>
+                    <field name="court_type_id" attrs="{'readonly': [('district_id', '=', False)]}"
+                           domain="[('district_id', '=', district_id)]" filters="1"
+                    />
+                    <field name="court_name_id" attrs="{'readonly': [('court_type_id', '=', False)]}"
+                           domain="[('court_type_id', '=', court_type_id)]" filters="1"
+                    />
+                    <field name="case_category_id" attrs="{'readonly': [('court_name_id', '=', False)]}"
+                           domain="[('court_type_id', '=', court_type_id)]" filters="1"
+                    />
+
+                    <field name="police_station_id" attrs="{'readonly': [('district_id', '=', False)]}"
+                           domain="[('district_id', '=', district_id)]" filters="1"
+                    />
+                    <field name="further_article" filters="1"/>
+                    <field name="party_1_id" filters="1"/>
+                    <field name="party_2_id" domain="[('id', '!=', party_1_id)]" filters="1"/>
                 </tree>
             </field>
         </record>
@@ -106,6 +174,82 @@
                         </group>
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        <record id="matters_kanban" model="ir.ui.view">
+            <field name="name">Matters.kanban</field>
+            <field name="model">matter.model</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record">
+                                <div class="o_kanban_card">
+                                    <div class="o_kanban_primary">
+                                        <div class="o_kanban_header">
+                                            <b>
+                                                <field name="title" style="font-size: 80px;"/>
+                                            </b>
+                                        </div>
+                                        <br/>
+                                        <div class="o_kanban_content">
+                                            <div>
+                                                <div class="kanban-label">
+                                                    <b>Matter Status:</b>
+                                                </div>
+                                                <div class="kanban-button">
+                                                    <button class="btn  btn-sm  btn-success">
+                                                        <field name="case_status_id"/>
+                                                    </button>
+                                                </div>
+                                                <div class="o_kanban_content">
+                                                    <div class="kanban-field-label" style=" display: inline-block;
+    margin-right: 10px;">
+                                                        <b>District:</b>
+                                                        <field name="district_id"/>
+                                                    </div>
+                                                </div>
+                                                <div class="o_kanban_content">
+                                                    <div class="kanban-field-label" style=" display: inline-block;
+    margin-right: 10px;">
+                                                        <b>Assign To:</b>
+                                                        <field name="assign_to_user_ids"/>
+                                                    </div>
+                                                </div>
+                                                <div class="o_kanban_content">
+                                                    <div class="kanban-field-label" style=" display: inline-block;
+    margin-right: 10px;">
+                                                        <b>Reviewed By</b>
+                                                        <field name="reviewed_by_ids"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="matters_search" model="ir.ui.view">
+            <field name="name">Matters.search</field>
+            <field name="model">matter.model</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="title"/>
+                    <field name="district_id" string="District" filters="1" context="{'group_by': 'district_id'}"/>
+                    <field name="court_type_id" string="Court Type" filters="1"
+                           context="{'group_by': 'court_type_id'}"/>
+                    <field name="court_name_id" string="Court Name" context="{'group_by': 'court_name_id'}" filters="1"/>
+                    <!-- Other fields for searching -->
+                    <searchpanel>
+                        <field name="case_status_id"/>
+                    </searchpanel>
+                </search>
             </field>
         </record>
 
